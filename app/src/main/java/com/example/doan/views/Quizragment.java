@@ -23,7 +23,6 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.doan.Model.QuestionModel;
 import com.example.doan.R;
@@ -203,7 +202,6 @@ public class Quizragment extends Fragment implements View.OnClickListener {
     public void onClick(View v) {
         if (v.getId() == R.id.option1Btn) {
             time = time + (timer-Long.parseLong(timerCountTv.getText().toString()));
-            Toast.makeText(getContext(), Long.toString(time), Toast.LENGTH_SHORT).show();
             verifyAnswer(option1Btn);
         } else if (v.getId() == R.id.option2Btn) {
             time = time + (timer-Long.parseLong(timerCountTv.getText().toString()));
@@ -257,11 +255,11 @@ public class Quizragment extends Fragment implements View.OnClickListener {
               if (answer.equals(button.getText())){
                  button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00FF00")));
                  correctAnswer++;
-                 ansFeedBackTv.setText("Correct Answer");
+                 ansFeedBackTv.setText("Đáp án đúng");
               }else{
                   button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF0000")));
                   wrongAnswer++;
-                  ansFeedBackTv.setText("Wrong Answer \nCorrect Answer :" + answer);
+                  ansFeedBackTv.setText("Đáp án sai \nĐáp án đúng :" + answer);
               }
             ansFeedBackTv.setVisibility(View.VISIBLE);
         }
