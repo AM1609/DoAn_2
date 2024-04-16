@@ -1,31 +1,22 @@
 package com.example.doan.Adapter;
 
-
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
-import com.example.doan.Model.ChartsModel;
-import com.example.doan.Model.QuizListModel;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.example.doan.R;
-
 import java.util.List;
 
 public class ChartsAdapter extends RecyclerView.Adapter<ChartsAdapter.ViewHolder> {
 
-    private List<ChartsModel> chartsList;
-    private Context context;
+    private List<QueryDocumentSnapshot> chartsList; // Thay đổi kiểu dữ liệu của danh sách
 
-    public void setChartListModels(List<ChartsModel> chartListModels) {
-        this.chartsList = chartListModels;
-    }
-    public ChartsAdapter(Context context, List<ChartsModel> chartsList) {
-        this.context = context;
+    // Thêm constructor mới để nhận danh sách của QueryDocumentSnapshot
+    public ChartsAdapter(Context context, List<QueryDocumentSnapshot> chartsList) {
         this.chartsList = chartsList;
     }
 
@@ -38,13 +29,18 @@ public class ChartsAdapter extends RecyclerView.Adapter<ChartsAdapter.ViewHolder
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        ChartsModel chartsModel = chartsList.get(position);
+        QueryDocumentSnapshot document = chartsList.get(position);
 
-        holder.txtUserId.setText(chartsModel.getCurrentUserId());
-        holder.txtCorrect.setText(String.valueOf(chartsModel.getCorrect()));
-        holder.txtNotAnswered.setText(String.valueOf(chartsModel.getNotAnswered()));
-        holder.txtWrong.setText(String.valueOf(chartsModel.getWrong()));
-        holder.txtTime.setText(String.valueOf(chartsModel.getTime()));
+        // Lấy dữ liệu từ QueryDocumentSnapshot
+        String userId = document.getString("currentUserId");
+        Long correct = document.getLong("correct");
+        Long time = document.getLong("time");
+
+        // Đặt dữ liệu vào TextViews
+        holder.Nubertxt.setText(String.valueOf(position + 1));
+        holder.txtUserId.setText(userId);
+        holder.txtCorrect.setText(String.valueOf(correct));
+        holder.txtTime.setText(String.valueOf(time));
     }
 
     @Override
@@ -53,15 +49,16 @@ public class ChartsAdapter extends RecyclerView.Adapter<ChartsAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-
-        TextView txtUserId, txtCorrect, txtNotAnswered, txtWrong, txtTime;
+        TextView txtUserId, txtCorrect, txtTime,Nubertxt;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
-
             txtUserId = itemView.findViewById(R.id.Usernametxt);
             txtCorrect = itemView.findViewById(R.id.Scoretxt);
+
             txtTime = itemView.findViewById(R.id.Timetxt);
+            Nubertxt = itemView.findViewById(R.id.Nubertxt);
         }
     }
 }
+.
