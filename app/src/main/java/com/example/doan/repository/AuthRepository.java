@@ -57,6 +57,19 @@ public class AuthRepository {
             }
         });
     }
+    public void ForgetPass(String email ){
+        firebaseAuth.sendPasswordResetEmail(email).addOnCompleteListener(new OnCompleteListener<Void>() {
+            @Override
+            public void onComplete(@NonNull Task<Void> task) {
+                if (task.isSuccessful()){
+                    Toast.makeText(application, "Đã gửi email khôi phục mật khẩu cho bạn" , Toast.LENGTH_SHORT).show();
+                }else{
+                    Toast.makeText(application, task.getException().getMessage() , Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+    }
     public void signOut(){
         firebaseAuth.signOut();
     }

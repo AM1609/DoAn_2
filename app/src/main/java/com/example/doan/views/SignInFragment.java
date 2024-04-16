@@ -30,7 +30,7 @@ public class SignInFragment extends Fragment {
     private AuthViewModel viewModel;
     private NavController navController;
     private EditText editEmail, editPass;
-    private TextView signUpText;
+    private TextView signUpText, forgotpassText;
     private Button signInBtn;
 
     @Override
@@ -49,6 +49,7 @@ public class SignInFragment extends Fragment {
         editPass = view.findViewById(R.id.editPassUp);
         signUpText = view.findViewById(R.id.textView);
         signInBtn = view.findViewById(R.id.btnSignIn);
+        forgotpassText = view.findViewById(R.id.textViewForgetPass);
 
 
         signUpText.setOnClickListener(new View.OnClickListener() {
@@ -57,7 +58,12 @@ public class SignInFragment extends Fragment {
                 navController.navigate(R.id.action_signInFragment_to_signUpFragment);
             }
         });
-
+        forgotpassText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                navController.navigate(R.id.action_signInFragment_to_forgotPassFragment);
+            }
+        });
         signInBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

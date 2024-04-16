@@ -39,6 +39,9 @@ public class AuthViewModel extends AndroidViewModel {
     public void signIn(String email, String pass){
         repository.signIn(email, pass);
     }
+    public void ForgetPass(String email){
+        repository.ForgetPass(email);
+    }
     public void signOut(){
         repository.signOut();
     }
