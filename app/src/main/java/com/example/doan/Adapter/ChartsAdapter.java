@@ -1,6 +1,8 @@
 package com.example.doan.Adapter;
 
 import android.content.Context;
+import android.content.res.ColorStateList;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -38,9 +40,35 @@ public class ChartsAdapter extends RecyclerView.Adapter<ChartsAdapter.ViewHolder
 
         // Đặt dữ liệu vào TextViews
         holder.Nubertxt.setText(String.valueOf(position + 1));
+
+
         holder.txtUserId.setText(userId);
         holder.txtCorrect.setText(String.valueOf(correct));
         holder.txtTime.setText(String.valueOf(time));
+        if (position ==0){
+            holder.Nubertxt.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFFF00")));
+            holder.txtUserId.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFFF00")));
+            holder.txtCorrect.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFFF00")));
+            holder.txtTime.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFFF00")));
+            holder.txt3.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFFF00")));
+            holder.txt4.setTextColor(ColorStateList.valueOf(Color.parseColor("#FFFF00")));
+        }
+        if (position ==1){
+            holder.Nubertxt.setTextColor(ColorStateList.valueOf(Color.parseColor("#C0C0C0")));
+            holder.txtUserId.setTextColor(ColorStateList.valueOf(Color.parseColor("#C0C0C0")));
+            holder.txtCorrect.setTextColor(ColorStateList.valueOf(Color.parseColor("#C0C0C0")));
+            holder.txtTime.setTextColor(ColorStateList.valueOf(Color.parseColor("#C0C0C0")));
+            holder.txt3.setTextColor(ColorStateList.valueOf(Color.parseColor("#C0C0C0")));
+            holder.txt4.setTextColor(ColorStateList.valueOf(Color.parseColor("#C0C0C0")));
+        }
+        if (position ==2){
+            holder.Nubertxt.setTextColor(ColorStateList.valueOf(Color.parseColor("#7C5301")));
+            holder.txtUserId.setTextColor(ColorStateList.valueOf(Color.parseColor("#7C5301")));
+            holder.txtCorrect.setTextColor(ColorStateList.valueOf(Color.parseColor("#7C5301")));
+            holder.txtTime.setTextColor(ColorStateList.valueOf(Color.parseColor("#7C5301")));
+            holder.txt3.setTextColor(ColorStateList.valueOf(Color.parseColor("#7C5301")));
+            holder.txt4.setTextColor(ColorStateList.valueOf(Color.parseColor("#7C5301")));
+        }
     }
 
     @Override
@@ -49,16 +77,17 @@ public class ChartsAdapter extends RecyclerView.Adapter<ChartsAdapter.ViewHolder
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder {
-        TextView txtUserId, txtCorrect, txtTime,Nubertxt;
+        TextView txtUserId, txtCorrect, txtTime,Nubertxt, txt3, txt4;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtUserId = itemView.findViewById(R.id.Usernametxt);
             txtCorrect = itemView.findViewById(R.id.Scoretxt);
-
+            txt3 = itemView.findViewById(R.id.txtdiem);
+            txt4 = itemView.findViewById(R.id.txttime);
             txtTime = itemView.findViewById(R.id.Timetxt);
             Nubertxt = itemView.findViewById(R.id.Nubertxt);
         }
     }
 }
-.
+

@@ -58,10 +58,6 @@ public class Quizragment extends Fragment implements View.OnClickListener {
     private long time = 0;
 
 
-    String email = "ndwadawdwadakiet2708@gmail.com";
-    Bundle bundle = getArguments();
-
-
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -71,7 +67,7 @@ public class Quizragment extends Fragment implements View.OnClickListener {
                 .getInstance(getActivity().getApplication())).get(QuestionViewModel.class);
 
 
-//            email = bundle.getString("email", "");
+
 
 
     }

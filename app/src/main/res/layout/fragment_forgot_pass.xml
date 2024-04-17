@@ -22,17 +22,17 @@
 
     <LinearLayout
         android:layout_width="409dp"
-        android:layout_height="350dp"
+        android:layout_height="300dp"
         android:orientation="vertical">
 
         <TextView
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="36dp"
             android:text="Hãy nhập gmail của bạn"
             android:textAlignment="center"
             android:textColor="@color/white"
-            android:layout_marginTop="36dp"
             android:textSize="30dp"
             android:textStyle="bold" />
 
