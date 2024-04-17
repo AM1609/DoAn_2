@@ -6,10 +6,18 @@ public class QuestionModel {
 
     @DocumentId
     private String questionId;
-    private String answer , question , option_a , option_b , option_c;
+    private String answer , question ,qimage, option_a , option_b , option_c;
     private long timer;
 
     public QuestionModel(){}
+
+    public String getQimage() {
+        return qimage;
+    }
+
+    public void setQimage(String qimage) {
+        this.qimage = qimage;
+    }
 
     public String getQuestionId() {
         return questionId;
@@ -67,7 +75,7 @@ public class QuestionModel {
         this.timer = timer;
     }
 
-    public QuestionModel(String questionId, String answer, String question, String option_a, String option_b, String option_c, long timer) {
+    public QuestionModel(String questionId, String answer, String question,String qimage, String option_a, String option_b, String option_c, long timer) {
         this.questionId = questionId;
         this.answer = answer;
         this.question = question;
@@ -75,5 +83,6 @@ public class QuestionModel {
         this.option_b = option_b;
         this.option_c = option_c;
         this.timer = timer;
+        this.qimage = qimage;
     }
 }

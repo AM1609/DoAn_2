@@ -23,8 +23,10 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
+import com.bumptech.glide.Glide;
+import com.example.doan.Adapter.QuizListAdapter;
 import com.example.doan.Model.QuestionModel;
+import com.example.doan.Model.QuizListModel;
 import com.example.doan.R;
 import com.example.doan.viewmodel.QuestionViewModel;
 import com.google.firebase.auth.FirebaseAuth;
@@ -32,7 +34,14 @@ import com.google.firebase.auth.FirebaseAuth;
 import java.util.HashMap;
 import java.util.List;
 import android.media.MediaPlayer;
-
+import com.bumptech.glide.Glide;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.firebase.ui.storage.images.FirebaseImageLoader;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.squareup.picasso.Picasso;
 
 
 public class Quizragment extends Fragment implements View.OnClickListener {
@@ -40,6 +49,7 @@ public class Quizragment extends Fragment implements View.OnClickListener {
 
 
     private QuestionViewModel viewModel;
+    private StorageReference storageReference;
     private NavController navController;
     private ProgressBar progressBar;
     private Button option1Btn , option2Btn , option3Btn , nextQueBtn;
@@ -59,6 +69,8 @@ public class Quizragment extends Fragment implements View.OnClickListener {
     private long time = 0;
     private Context context;
     private MediaPlayer mediaRight,mediaWrong;
+    ImageView qimage;
+    private List<QuestionModel> questionModel;
 
 
     String email = "ndwadawdwadakiet2708@gmail.com";
@@ -98,7 +110,7 @@ public class Quizragment extends Fragment implements View.OnClickListener {
         mediaRight = MediaPlayer.create(getActivity(), R.raw.right);
         mediaWrong = MediaPlayer.create(getActivity(), R.raw.wrong);
         navController = Navigation.findNavController(view);
-
+        qimage = view.findViewById(R.id.imageView4);
         closeQuizBtn = view.findViewById(R.id.imageView3);
         option1Btn = view.findViewById(R.id.option1Btn);
         option2Btn = view.findViewById(R.id.option2Btn);
@@ -152,6 +164,7 @@ public class Quizragment extends Fragment implements View.OnClickListener {
 
     private void loadQuestions(int i){
 
+
         currentQueNo = i;
         viewModel.getQuestionMutableLiveData().observe(getViewLifecycleOwner(), new Observer<List<QuestionModel>>() {
             @Override
@@ -163,6 +176,9 @@ public class Quizragment extends Fragment implements View.OnClickListener {
                 timer = questionModels.get(i-1).getTimer();
                 answer = questionModels.get(i-1).getAnswer();
 
+                storageReference = FirebaseStorage.getInstance().getReference().child(questionModels.get(i-1).getQimage());
+                // Tải ảnh từ Firebase Storage vào ImageView bằng Glide và FirebaseImageLoader
+                Picasso.get().load(questionModels.get(i-1).getQimage()).into(qimage);
                 //todo set current que no, to que number tv
                 questionNumberTv.setText(String.valueOf(currentQueNo));
                 startTimer();

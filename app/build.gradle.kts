@@ -46,6 +46,10 @@ dependencies {
     implementation("androidx.navigation:navigation-fragment:$nav_version")
     implementation("androidx.navigation:navigation-ui:$nav_version")
     implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("com.firebaseui:firebase-ui-storage:7.2.0")
+    implementation("com.squareup.picasso:picasso:2.71828")
+
+
 
 
 }
