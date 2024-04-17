@@ -1,6 +1,6 @@
 package com.example.doan.views;
 
-import android.content.Intent;
+import android.content.Context;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -8,7 +8,6 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.content.ContextCompat;
-import androidx.core.graphics.drawable.DrawableCompat;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
@@ -23,15 +22,17 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.doan.Model.QuestionModel;
 import com.example.doan.R;
 import com.example.doan.viewmodel.QuestionViewModel;
-import com.example.doan.viewmodel.QuizListViewModel;
 import com.google.firebase.auth.FirebaseAuth;
 
 import java.util.HashMap;
 import java.util.List;
+import android.media.MediaPlayer;
+
 
 
 public class Quizragment extends Fragment implements View.OnClickListener {
@@ -56,6 +57,12 @@ public class Quizragment extends Fragment implements View.OnClickListener {
     private String answer = "";
     private String currentUserId = FirebaseAuth.getInstance().getCurrentUser().getEmail();
     private long time = 0;
+    private Context context;
+    private MediaPlayer mediaRight,mediaWrong;
+
+
+    String email = "ndwadawdwadakiet2708@gmail.com";
+    Bundle bundle = getArguments();
 
 
 
@@ -67,7 +74,7 @@ public class Quizragment extends Fragment implements View.OnClickListener {
                 .getInstance(getActivity().getApplication())).get(QuestionViewModel.class);
 
 
-
+//            email = bundle.getString("email", "");
 
 
     }
@@ -83,6 +90,13 @@ public class Quizragment extends Fragment implements View.OnClickListener {
     public void onViewCreated(@NonNull View view, @Nullable  Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        context = getContext();
+        if (context == null) {
+            context = requireContext();
+        }
+
+        mediaRight = MediaPlayer.create(getActivity(), R.raw.right);
+        mediaWrong = MediaPlayer.create(getActivity(), R.raw.wrong);
         navController = Navigation.findNavController(view);
 
         closeQuizBtn = view.findViewById(R.id.imageView3);
@@ -165,7 +179,7 @@ public class Quizragment extends Fragment implements View.OnClickListener {
         countDownTimer = new CountDownTimer(timer * 1000 , 1000) {
             @Override
             public void onTick(long millisUntilFinished) {
-              // update time
+                // update time
                 timerCountTv.setText(millisUntilFinished / 1000 + "");
 
                 Long percent = millisUntilFinished/(timer*10);
@@ -248,15 +262,19 @@ public class Quizragment extends Fragment implements View.OnClickListener {
 
     private void verifyAnswer(Button button){
         if (canAnswer){
-              if (answer.equals(button.getText())){
-                 button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00FF00")));
-                 correctAnswer++;
-                 ansFeedBackTv.setText("Đáp án đúng");
-              }else{
-                  button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF0000")));
-                  wrongAnswer++;
-                  ansFeedBackTv.setText("Đáp án sai \nĐáp án đúng :" + answer);
-              }
+            if (answer.equals(button.getText())){
+
+                button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#00FF00")));
+                correctAnswer++;
+                ansFeedBackTv.setText("Correct Answer");
+
+                mediaRight.start();
+            }else{
+                button.setBackgroundTintList(ColorStateList.valueOf(Color.parseColor("#FF0000")));
+                wrongAnswer++;
+                ansFeedBackTv.setText("Wrong Answer \nCorrect Answer :" + answer);
+                mediaWrong.start();
+            }
             ansFeedBackTv.setVisibility(View.VISIBLE);
         }
         canAnswer=false;

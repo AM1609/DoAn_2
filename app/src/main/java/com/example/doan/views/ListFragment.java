@@ -16,6 +16,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.ProgressBar;
 
 import com.example.doan.Adapter.QuizListAdapter;
@@ -35,7 +36,8 @@ public class ListFragment extends Fragment implements QuizListAdapter.OnItemClic
     private QuizListViewModel viewModel;
     private AuthViewModel viewModel1;
     private QuizListAdapter adapter;
-    Button btnDX, btnXH;
+
+    ImageView btnXH1, btnLogout;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -58,16 +60,23 @@ public class ListFragment extends Fragment implements QuizListAdapter.OnItemClic
     @Override
     public void onViewCreated(@NonNull  View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        btnDX = view.findViewById(R.id.btnDX);
-        btnXH = view.findViewById(R.id.btnXH);
-        btnDX.setOnClickListener(new View.OnClickListener() {
+        btnLogout =view.findViewById(R.id.imageView4);
+
+        btnXH1 = view.findViewById(R.id.imageView2);
+        btnLogout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 viewModel1.signOut();
                 navController.navigate(R.id.action_listFragment_to_splashFragment);
             }
         });
-        btnXH.setOnClickListener(new View.OnClickListener() {
+//        btnXH.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                navController.navigate(R.id.action_listFragment_to_chartsFragment);
+//            }
+//        });
+        btnXH1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 navController.navigate(R.id.action_listFragment_to_chartsFragment);
