@@ -101,6 +101,7 @@ public class ChartDetalFragment extends Fragment {
 
                 db.collection("Quiz").document(quizId).collection("results")
                         .orderBy("correct", Query.Direction.DESCENDING)
+                        .orderBy("time", Query.Direction.ASCENDING)
                         .get()
                         .addOnCompleteListener(task -> {
                             if (task.isSuccessful()) {
